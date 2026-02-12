@@ -21,7 +21,8 @@ function App() {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('/api/data');
+      const API_URL = import.meta.env.VITE_API_URL || '/api';
+      const response = await axios.get(`${API_URL}/data`);
       setData(response.data);
       
       // Set first pharmacy as default

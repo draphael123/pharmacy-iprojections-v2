@@ -5,7 +5,20 @@ import os
 from pathlib import Path
 
 app = Flask(__name__)
-CORS(app)
+
+# Configure CORS for production
+CORS(app, resources={
+    r"/api/*": {
+        "origins": [
+            "http://localhost:3000",
+            "http://localhost:5173",
+            "https://*.vercel.app",
+            os.environ.get('FRONTEND_URL', '*')
+        ],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type"]
+    }
+})
 
 # Load processed data
 DATA_FILE = Path(__file__).parent / 'processed_data.json'
@@ -93,5 +106,7 @@ if __name__ == '__main__':
     print("Starting Pharmacy Projections API...")
     print(f"Data file location: {DATA_FILE}")
     print(f"Data file exists: {DATA_FILE.exists()}")
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    debug = os.environ.get('FLASK_ENV') != 'production'
+    app.run(debug=debug, host='0.0.0.0', port=port)
 

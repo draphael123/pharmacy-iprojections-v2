@@ -18,6 +18,10 @@ build/
 .env.test.local
 .env.production.local
 
+# Keep these for documentation
+!.env.development
+!.env.production
+
 # Logs
 npm-debug.log*
 yarn-debug.log*
