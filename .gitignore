@@ -40,7 +40,7 @@ ENV/
 .venv
 
 # Data files
-backend/processed_data.json
+# backend/processed_data.json  <- Commented out - we want to include this file for deployment
 
 # Raw data folders (exclude from repo - too large)
 September*/
