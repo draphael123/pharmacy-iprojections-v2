@@ -3,9 +3,11 @@ services:
     name: pharmacy-api
     env: python
     region: oregon
-    buildCommand: "pip install -r backend/requirements.txt && cd backend && python data_processor.py"
+    buildCommand: "pip install -r backend/requirements.txt"
     startCommand: "cd backend && gunicorn api:app"
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
+      - key: PORT
+        value: 5000
 
